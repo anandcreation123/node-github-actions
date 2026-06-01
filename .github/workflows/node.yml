@@ -1,30 +1,31 @@
 name: Node.js CI
 
-on: 
- push:
-  branches:
-   - main
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-   runs-on: ubuntu-latest
 
-   startegy:
-    matrix:
-     node-version: [18.x]
+    runs-on: ubuntu-latest
 
-   steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+    strategy:
+      matrix:
+        node-version: [18.x]
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4\
-      with:
-        node-version: ${{matrix.node-version}}
+    steps:
 
-    - name: Install Dependencies
-      run: npm Install
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Start Application
-      run: npm startegy      
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Start Application
+        run: npm start
